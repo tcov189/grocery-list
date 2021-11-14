@@ -1,21 +1,23 @@
 import React from "react";
 
-function Button({ children, buttonHanlder, type = "default" }) {
+function Button({ children, clickHandler, type = "default" }) {
   const onClickHandler =
-    buttonHanlder || (() => console.log("button was clicked"));
+    clickHandler || (() => console.log("button was clicked"));
 
-  let buttonClasses = "px-3 py-1 font-bold border rounded-sm shadow-sm";
+  let buttonClasses = "flex items-center px-2 py-2 font-semibold border rounded-sm shadow-sm";
 
   switch (type) {
     case "success":
-      buttonClasses += " bg-green-500 text-gray-700";
+      buttonClasses += " bg-green-500 border-green-600 text-gray-800";
+      break;
+
+    case "primary":
+      buttonClasses += " bg-blue-500 border-blue-600 text-gray-200";
       break;
 
     default:
       break;
   }
-
-  console.log(buttonClasses);
 
   return (
     <button className={buttonClasses} onClick={onClickHandler}>
