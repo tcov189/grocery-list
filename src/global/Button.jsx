@@ -11,6 +11,10 @@ function Button({ children, clickHandler, type = "default" }) {
       buttonClasses += " bg-green-500 border-green-600 text-gray-800";
       break;
 
+    case "error":
+      buttonClasses += " bg-red-500 border-red-600 text-gray-800";
+      break;
+
     case "primary":
       buttonClasses += " bg-blue-500 border-blue-600 text-gray-200";
       break;

@@ -1,11 +1,17 @@
-import Button from "./global/Button";
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import { PlusSmIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 
-import { useState } from "react";
+import Button from "./global/Button";
 import AddListModal from "./GroceryList/AddListModal";
 import useGetLists from "./hooks/useGetLists";
 import GroceryLists from "./GroceryList/GroceryLists";
 
+import EditGroceryList from "./GroceryList/EditGroceryList";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,19 +32,24 @@ function App() {
   }
 
   return (
-    <div className="h-screen w-full bg-gray-300">
-
+    <div className="flex flex-col min-h-screen bg-gray-300">
       <header className="w-full bg-gray-500 text-gray-50 py-3 px-2">
         <div className="flex align-items">
           <ShoppingCartIcon className="w-5 mr-1" /> Grocery List App
         </div>
       </header>
-      <main className="my-2 px-2 max-w-md flex-1">
-        <Button type="success" clickHandler={() => setModalOpen(true)}><PlusSmIcon className="w-5" /> Create list</Button>
-
-        <div className="mt-4 max-h-full overflow-scroll">
-          {lists.length > 0 ? <GroceryLists lists={lists} /> : <p className="font-bold text-lg">No lists found!</p>}
-        </div>
+      <main className="my-2 px-2 flex-1">
+        <Router>
+          <Switch>
+            <Route path="/lists/:id">
+              <EditGroceryList />
+            </Route>
+            <Route path="/">
+              <Button type="success" clickHandler={() => setModalOpen(true)}><PlusSmIcon className="w-5" /> Create list</Button>
+              <GroceryLists lists={lists} />
+            </Route>
+          </Switch>
+        </Router>
       </main>
 
       {modalOpen && <AddListModal closeHandler={() => setModalOpen(false)} addListHandler={addListHandler} />}
