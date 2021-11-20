@@ -8,24 +8,51 @@ const getList = (id) => {
     return JSON.parse(localStorage.getItem(`list_${id}`));
 }
 
-const updateList = (id, newItem) => {
-   let list = JSON.parse(localStorage.getItem(`list_${id}`));
+const addNewListItem = (listId) => {
+    let list = getList(listId);
 
-   let listItems = [...list.items];
+    let listItems = [...list.items];
 
-   listItems.push(newItem);
+    listItems.push({
+        id: listItems.length + 1,
+        quantity: 0,
+        item: ""
+    });
 
-   list.items = listItems;
+    list.items = listItems;
 
-   localStorage.setItem(`list_${id}`, JSON.stringify(list));
+    return updateList(listId, { ...list });
+}
 
-   return list;
+const removeListItem = (listId, listItemId) => {
+    let list = getList(listId);
+
+    let listItems = [...list.items];
+
+    list.items = listItems.filter((listItem) => listItem.id !== listItemId);
+
+    return updateList(listId, { ...list });
+}
+
+const updateList = (listId, listData) => {
+    let list = getList(listId);
+
+    let newListObject = { ...list, ...listData };
+
+    newListObject.name = listData.name || list.name;
+    newListObject.items = listData.items || list.items;
+
+    localStorage.setItem(`list_${list.id}`, JSON.stringify(newListObject));
+
+    return newListObject;
 };
 
 
 const dataProvider = {
     getLists,
     getList,
+    removeListItem,
+    addNewListItem,
     updateList,
 }
 

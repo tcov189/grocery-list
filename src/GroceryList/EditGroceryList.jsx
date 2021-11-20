@@ -25,25 +25,17 @@ function EditGroceryList() {
     }
 
     function addNewItemHandler() {
-        let currentListItems = [...listItems];
+        const updatedList = dataProvider.addNewListItem(id);
 
-        let newItem = {
-            id: currentListItems.length + 1,
-            quantity: 0,
-            item: ""
-        }
-
-        currentListItems.push(newItem);
-
-        dataProvider.updateList(id, newItem);
-
-        setCurrentList({ ...currentList, items: currentListItems });
-        setListItems(listItems);
+        setCurrentList(updatedList);
+        setListItems(updatedList.items);
     }
 
-    function deleteHandler(id) {
-        let newListItems = listItems.filter((item) => item.id !== id);
-        setCurrentList({ ...currentList, items: newListItems });
+    function deleteHandler(itemId) {
+        const updatedList = dataProvider.removeListItem(id, itemId);
+
+        setCurrentList(updatedList);
+        setListItems(updatedList.items);
     }
 
     return (
