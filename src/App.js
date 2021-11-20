@@ -7,28 +7,26 @@ import {
 import { PlusSmIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 
 import Button from "./global/Button";
-import AddListModal from "./GroceryList/AddListModal";
-import useGetLists from "./hooks/useGetLists";
-import GroceryLists from "./GroceryList/GroceryLists";
 
+import AddListModal from "./GroceryList/AddListModal";
+import GroceryLists from "./GroceryList/GroceryLists";
 import EditGroceryList from "./GroceryList/EditGroceryList";
+import dataProvider from "./data/dataProvider";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const savedLists = JSON.parse(localStorage.getItem('lists') ?? "[]");
-  const [lists, setLists] = useGetLists(savedLists);
+  const savedLists = dataProvider.getLists();
+
+  const [lists, setLists] = useState(savedLists);
 
   function addListHandler(list) {
-    const currentLists = [...lists];
+    const newId = lists.length + 1;
+    const newList = { ...list, id: newId };
 
-    const newList = { ...list, id: savedLists.length + 1 };
+    localStorage.setItem(`list_${newId}`, JSON.stringify(newList));
 
-    currentLists.push(newList);
-
-    localStorage.setItem('lists', JSON.stringify(currentLists));
-
-    setLists(currentLists);
+    setLists([...lists, newList]);
   }
 
   return (

@@ -1,24 +1,32 @@
-const useUpdateList = (id, newListObject) => {
-    const savedLists = JSON.parse(localStorage.getItem('lists') ?? "[]");
+const getLists = () => {
+    let listKeys = Object.keys(localStorage).filter((list) => list.includes('list_'));
 
-    savedLists.map((list) => {
-        if (list.id === id) {
-            return {
-                ...list, ...newListObject
-            }
-        } else {
-            return {
-                ...newListObject
-            }
-        }
-    });
+    return listKeys.map((listKey) => JSON.parse(localStorage.getItem(listKey)));
+}
 
-    localStorage.setItem('lists', JSON.stringify(savedLists));
+const getList = (id) => {
+    return JSON.parse(localStorage.getItem(`list_${id}`));
+}
 
-    return savedLists;
+const updateList = (id, newItem) => {
+   let list = JSON.parse(localStorage.getItem(`list_${id}`));
+
+   let listItems = [...list.items];
+
+   listItems.push(newItem);
+
+   list.items = listItems;
+
+   localStorage.setItem(`list_${id}`, JSON.stringify(list));
+
+   return list;
 };
 
 
-module.exports = {
-    useUpdateList
+const dataProvider = {
+    getLists,
+    getList,
+    updateList,
 }
+
+export default dataProvider;
