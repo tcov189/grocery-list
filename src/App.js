@@ -12,6 +12,7 @@ import AddListModal from "./GroceryList/AddListModal";
 import GroceryLists from "./GroceryList/GroceryLists";
 import EditGroceryList from "./GroceryList/EditGroceryList";
 import dataProvider from "./data/dataProvider";
+import ShopGroceryList from "./GroceryList/ShopGroceryList";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,8 +51,11 @@ function App() {
       <main className="my-2 px-2 flex-1">
         <Router>
           <Switch>
-            <Route path="/lists/:id">
+            <Route exact path="/lists/:id">
               <EditGroceryList />
+            </Route>
+            <Route exact path="/lists/shop/:id">
+              <ShopGroceryList />
             </Route>
             <Route path="/">
               <div className="flex justify-between">

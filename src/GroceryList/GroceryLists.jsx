@@ -22,7 +22,9 @@ function GroceryLists({ lists, deleteListHandler }) {
                                 <Button type="primary" clickHandler={null}><PencilIcon className="w-6" /></Button>
                             </Link>
 
-                            <Button type="success"><ShoppingCartIcon className="w-6" /></Button>
+                            <Link to={`/lists/shop/${list.id}`}>
+                                <Button type="success" clickHandler={null}><ShoppingCartIcon className="w-6" /></Button>
+                            </Link>
 
                         </div>
                     </div>

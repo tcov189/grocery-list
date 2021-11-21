@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TrashIcon, SaveIcon } from '@heroicons/react/outline'
+import { TrashIcon } from '@heroicons/react/outline'
 
 
 import Button from '../global/Button';

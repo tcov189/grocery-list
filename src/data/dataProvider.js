@@ -61,8 +61,7 @@ const updateListItem = (listId, updatedItem) => {
 
     const listItemIndex = items.findIndex((item) => item.id === updatedItem.id);
 
-    items[listItemIndex].item = updatedItem.item;
-    items[listItemIndex].quantity = updatedItem.quantity;
+    items[listItemIndex]= {...items[listItemIndex], ...updatedItem};
 
     list.items = items;
 
