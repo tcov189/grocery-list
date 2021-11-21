@@ -3,8 +3,9 @@ import Button from '../global/Button'
 import {
     Link,
 } from "react-router-dom";
+import { PencilIcon, ShoppingCartIcon, TrashIcon } from '@heroicons/react/outline';
 
-function GroceryLists({ lists }) {
+function GroceryLists({ lists, deleteListHandler }) {
 
     return (
         <div>
@@ -12,14 +13,17 @@ function GroceryLists({ lists }) {
 
             {lists.map((list, index) => {
                 return (
-                    <div className="flex justify-between items-center px-1 my-1" key={`glist_${index}`}>
+                    <div className="flex justify-between items-center px-1 mb-8" key={`glist_${index}`}>
                         <p>{list.name}</p>
                         <div className="flex space-x-2">
+                            <Button type="error" clickHandler={() => deleteListHandler(list.id)}><TrashIcon className="w-6" /></Button>
+
                             <Link to={`/lists/${list.id}`}>
-                                <Button type="primary" clickHandler={null}>Edit</Button>
+                                <Button type="primary" clickHandler={null}><PencilIcon className="w-6" /></Button>
                             </Link>
 
-                            <Button type="success">Shop</Button>
+                            <Button type="success"><ShoppingCartIcon className="w-6" /></Button>
+
                         </div>
                     </div>
                 )

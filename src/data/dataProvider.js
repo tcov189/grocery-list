@@ -1,7 +1,7 @@
 const getLists = () => {
     let listKeys = Object.keys(localStorage).filter((list) => list.includes('list_'));
 
-    return listKeys.map((listKey) => JSON.parse(localStorage.getItem(listKey)));
+    return listKeys.map((listKey) => JSON.parse(localStorage.getItem(listKey))).sort((a,b) => a.id - b.id );
 }
 
 const getList = (id) => {
@@ -34,6 +34,12 @@ const removeListItem = (listId, listItemId) => {
     return updateList(listId, { ...list });
 }
 
+const removeList = (listId) => {
+    localStorage.removeItem(`list_${listId}`);
+
+    return getLists();
+}
+
 const updateList = (listId, listData) => {
     let list = getList(listId);
 
@@ -59,6 +65,7 @@ const dataProvider = {
     addNewListItem,
     updateList,
     clearLists,
+    removeList,
 }
 
 export default dataProvider;

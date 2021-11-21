@@ -29,6 +29,12 @@ function App() {
     setLists([...lists, newList]);
   }
 
+  function removeList(listId) {
+    const updatedLists = dataProvider.removeList(listId);
+
+    setLists(updatedLists);
+  }
+
   function clearLists() {
     dataProvider.clearLists();
     setLists([]);
@@ -52,7 +58,7 @@ function App() {
                 <Button type="success" clickHandler={() => setModalOpen(true)}><PlusSmIcon className="w-5" /> Create list</Button>
                 <Button type="error" clickHandler={() => clearLists()}><TrashIcon className="w-5" /> Clear All</Button>
               </div>
-              <GroceryLists lists={lists} />
+              <GroceryLists lists={lists} deleteListHandler={removeList} />
             </Route>
           </Switch>
         </Router>
