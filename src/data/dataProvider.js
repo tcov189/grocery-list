@@ -15,8 +15,9 @@ const addNewListItem = (listId) => {
 
     listItems.push({
         id: listItems.length + 1,
-        quantity: 0,
-        item: ""
+        quantity: 1,
+        item: "",
+        acquired: false,
     });
 
     list.items = listItems;
