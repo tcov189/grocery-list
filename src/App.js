@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { PlusSmIcon, ShoppingCartIcon } from '@heroicons/react/outline'
+import { PlusSmIcon, ShoppingCartIcon, TrashIcon } from '@heroicons/react/outline'
 
 import Button from "./global/Button";
 
@@ -29,6 +29,11 @@ function App() {
     setLists([...lists, newList]);
   }
 
+  function clearLists() {
+    dataProvider.clearLists();
+    setLists([]);
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-300">
       <header className="w-full bg-gray-500 text-gray-50 py-3 px-2">
@@ -43,7 +48,10 @@ function App() {
               <EditGroceryList />
             </Route>
             <Route path="/">
-              <Button type="success" clickHandler={() => setModalOpen(true)}><PlusSmIcon className="w-5" /> Create list</Button>
+              <div className="flex justify-between">
+                <Button type="success" clickHandler={() => setModalOpen(true)}><PlusSmIcon className="w-5" /> Create list</Button>
+                <Button type="error" clickHandler={() => clearLists()}><TrashIcon className="w-5" /> Clear All</Button>
+              </div>
               <GroceryLists lists={lists} />
             </Route>
           </Switch>

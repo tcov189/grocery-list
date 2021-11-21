@@ -47,6 +47,10 @@ const updateList = (listId, listData) => {
     return newListObject;
 };
 
+const clearLists = () => {
+    localStorage.clear();
+}
+
 
 const dataProvider = {
     getLists,
@@ -54,6 +58,7 @@ const dataProvider = {
     removeListItem,
     addNewListItem,
     updateList,
+    clearLists,
 }
 
 export default dataProvider;

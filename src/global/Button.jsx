@@ -4,7 +4,7 @@ function Button({ children, clickHandler, type = "default" }) {
   const onClickHandler =
     clickHandler || (() => console.log("button was clicked"));
 
-  let buttonClasses = "flex items-center px-2 py-2 font-semibold border rounded-sm shadow-sm";
+  let buttonClasses = "flex items-start px-2 py-2 font-semibold border rounded-sm shadow-sm";
 
   switch (type) {
     case "success":
@@ -12,7 +12,7 @@ function Button({ children, clickHandler, type = "default" }) {
       break;
 
     case "error":
-      buttonClasses += " bg-red-500 border-red-600 text-gray-800";
+      buttonClasses += " bg-red-500 border-red-600 text-gray-200";
       break;
 
     case "primary":
