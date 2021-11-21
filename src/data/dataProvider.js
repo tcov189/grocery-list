@@ -53,6 +53,23 @@ const updateList = (listId, listData) => {
     return newListObject;
 };
 
+const updateListItem = (listId, updatedItem) => {
+    const list = getList(listId);
+
+    const items = [...list.items];
+
+    const listItemIndex = items.findIndex((item) => item.id === updatedItem.id);
+
+    items[listItemIndex].item = updatedItem.item;
+    items[listItemIndex].quantity = updatedItem.quantity;
+
+    list.items = items;
+
+    localStorage.setItem(`list_${list.id}`, JSON.stringify(list));
+
+    return list;
+}
+
 const clearLists = () => {
     localStorage.clear();
 }
@@ -63,6 +80,7 @@ const dataProvider = {
     getList,
     removeListItem,
     addNewListItem,
+    updateListItem,
     updateList,
     clearLists,
     removeList,

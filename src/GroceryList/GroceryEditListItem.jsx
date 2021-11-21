@@ -4,14 +4,14 @@ import { TrashIcon, SaveIcon } from '@heroicons/react/outline'
 
 import Button from '../global/Button';
 
-function GroceryEditListItem({ listItem, deleteHandler, updateHandler }) {
+function GroceryEditListItem({ listId, listItem, deleteHandler, updateHandler }) {
     const [quantity, setQuantity] = useState(listItem.quantity ?? 0);
     const [item, setItem] = useState(listItem.item ?? "");
 
     return (
         <div className="flex flex-col items-end space-x-2 mb-2 item-row">
-            <div className="flex mb-1">
-                <div className="w-1/6 mr-2">
+            <div className="flex mb-2">
+                <div className="w-1/12 mr-2">
                     <label htmlFor={`quantity_${listItem.id}`}>Qty: </label>
                     <input
                         id={`quantity_${listItem.id}`}
@@ -21,7 +21,7 @@ function GroceryEditListItem({ listItem, deleteHandler, updateHandler }) {
                         type="number"
                     />
                 </div>
-                <div className="w-5/6">
+                <div className="w-11/12">
                     <label htmlFor={`item_${listItem.id}`}>Item: </label>
                     <input
                         id={`item_${listItem.id}`}
@@ -34,7 +34,7 @@ function GroceryEditListItem({ listItem, deleteHandler, updateHandler }) {
             </div>
 
             <div className="flex justify-between space-x-2">
-                <Button type="primary" clickHandler={() => updateHandler({ id: listItem.id, item, quantity })}>
+                <Button type="primary" clickHandler={() => updateHandler(listId, { id: listItem.id, item, quantity })}>
                     <SaveIcon className="w-5" />
                 </Button>
 
