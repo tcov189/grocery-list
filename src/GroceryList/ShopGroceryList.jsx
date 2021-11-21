@@ -29,12 +29,12 @@ function ShopGroceryList() {
     return (
         <div>
             <div className="flex items-center">
-                <div className="w-2/6">
+                <div className="w-1/6">
                     <Link to="/">
                         <ChevronLeftIcon className="w-6" />
                     </Link>
                 </div>
-                <p className="font-bold text-xl flex-1">Shopping {currentList.name}</p>
+                <p className="font-bold text-xl w-5/6">Shopping {currentList.name}</p>
             </div>
             <div className="flex flex-col mt-5 mb-12 item-list">
                 {listItems.length === 0 && <p className="mt-5">No items yet.</p>}

@@ -59,7 +59,7 @@ function EditGroceryList() {
     return (
         <div>
             <div className="flex items-center">
-                <div className="flex-1">
+                <div className="w-1/6">
                     <Link to="/">
                         <ChevronLeftIcon className="w-6" />
                     </Link>
