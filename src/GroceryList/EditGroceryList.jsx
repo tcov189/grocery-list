@@ -12,10 +12,12 @@ function EditGroceryList() {
 
     const [currentList, setCurrentList] = useState(dataProvider.getList(id));
     const [listItems, setListItems] = useState([]);
+    const [listCategories, setListCategories] = useState([]);
 
     useEffect(() => {
         if (currentList) {
             setListItems([...currentList.items])
+            setListCategories([...currentList.categories]);
         }
     }, [currentList]);
 
@@ -70,7 +72,7 @@ function EditGroceryList() {
             <div className="flex flex-col mt-5 mb-12 item-list">
                 {listItems.length === 0 && <p className="mt-5">No items yet.</p>}
 
-                {listItems.map((listItem, index) => <GroceryEditListItem listId={id} updateHandler={updateHandler} deleteHandler={deleteHandler} listItem={listItem} key={`list_item_${index}`} />)}
+                {listItems.map((listItem, index) => <GroceryEditListItem listCategories={listCategories} listId={id} updateHandler={updateHandler} deleteHandler={deleteHandler} listItem={listItem} key={`list_item_${index}`} />)}
 
             </div>
             <div className="flex mt-8 justify-between fixed bottom-2 right-2 left-2">

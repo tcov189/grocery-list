@@ -7,8 +7,6 @@ import { PencilIcon, ShoppingCartIcon, TrashIcon } from '@heroicons/react/outlin
 
 function GroceryLists({ lists, deleteListHandler }) {
 
-    console.log(lists)
-
     return (
         <div>
             <p className="font-bold text-lg mt-4">{lists.length > 0 ? "Current Lists" : "No Lists Yet"}</p>
