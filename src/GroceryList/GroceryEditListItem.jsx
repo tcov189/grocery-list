@@ -39,9 +39,10 @@ function GroceryEditListItem({ listCategories, listId, listItem, deleteHandler, 
                         id={`category_${listItem.id}`}
                         className="border bg-gray-100 border-gray-400 p-1 mt-1 rounded-sm"
                         onChange={(e) => categoryChangeHandler(e.target.value)}
+                        value={category}
                     >
                         {listCategories.map((listCategory, index) => (
-                            <option key={`${listCategory}_${index}`} value={listCategory} selected={listCategory === category}>{listCategory}</option>
+                            <option key={`${listCategory}_${index}`} value={listCategory}>{listCategory}</option>
                         ))}
                     </select>
                 </div>

@@ -17,7 +17,7 @@ function ShopGroceryListItem({listId, listItem, updateHandler }) {
     return (
         <div className="flex items-center space-x-3 mb-4" style={{ textDecoration: acquired ? 'line-through' : null }}>
             <Button type="primary" clickHandler={() => onChangeHandler()}>
-                <ShoppingBagIcon className="w-5" />
+                <ShoppingBagIcon className="w-4" />
             </Button>
             <p>{item.quantity} {item.item}</p>
         </div>

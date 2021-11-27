@@ -15,7 +15,7 @@ function ShopGroceryList() {
 
     useEffect(() => {
         if (currentList) {
-            setListItems([...currentList.items])
+            formatGroceryListItems(currentList)
         }
     }, [currentList]);
 
@@ -23,7 +23,18 @@ function ShopGroceryList() {
         const updatedList = dataProvider.updateListItem(listId, item);
 
         setCurrentList(updatedList);
-        setListItems(updatedList.items);
+        formatGroceryListItems(updatedList);
+    }
+
+    function formatGroceryListItems(list) {
+        const categories = list.categories;
+
+        const groceryItems = categories.map((category) => ({
+            category,
+            items: list.items.filter((item) => item.category === category)
+        }));
+
+        setListItems(groceryItems);
     }
 
     return (
@@ -39,7 +50,14 @@ function ShopGroceryList() {
             <div className="flex flex-col mt-5 mb-12 item-list">
                 {listItems.length === 0 && <p className="mt-5">No items yet.</p>}
 
-                {listItems.map((listItem, index) => <ShopGroceryListItem listId={id} updateHandler={updateHandler} listItem={listItem} key={`list_item_${index}`} />)}
+                {listItems.map((listItem, index) =>
+                    <div className="pb-6" key={`list_category_${index}`}>
+                        <p className="font-bold text-right">{listItem.category}</p>
+                        <hr className="border-gray-400 mb-2" />
+                        {listItem.items.map((item, index_2) =>
+                             <ShopGroceryListItem listId={id} updateHandler={updateHandler} listItem={item} key={`list_item_${index_2}`} />)}
+                    </div>
+                )}
 
             </div>
         </div>
