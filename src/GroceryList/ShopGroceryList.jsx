@@ -13,11 +13,15 @@ function ShopGroceryList() {
     const [currentList, setCurrentList] = useState(dataProvider.getList(id));
     const [listItems, setListItems] = useState([]);
 
+    const [visibleCategory, setVisibleCategory] = useState('all');
+
     useEffect(() => {
         if (currentList) {
-            formatGroceryListItems(currentList)
+            formatGroceryListItems(currentList);
         }
     }, [currentList]);
+
+    let allCategories = currentList.categories;
 
     function updateHandler(listId, item) {
         const updatedList = dataProvider.updateListItem(listId, item);
@@ -47,11 +51,20 @@ function ShopGroceryList() {
                 </div>
                 <p className="font-bold text-xl w-5/6">Shopping {currentList.name}</p>
             </div>
-            <div className="flex flex-col mt-5 mb-12 item-list">
+            <div className="flex mt-4">
+                <label className="pr-2 font-bold" htmlFor="categories">Filter:</label>
+                <select className="bg-gray-200 shadow-sm py-1 pl-1" name="categories" id="categories" value={visibleCategory} onChange={(e) => setVisibleCategory(e.target.value)}>
+                    <option value="all">All</option>
+                    {
+                        allCategories.map((cat, index) => <option value={cat} key={`category_${index}`}>{cat}</option>)
+                    }
+                </select>
+            </div>
+            <div className="flex flex-col mb-12 item-list">
                 {listItems.length === 0 && <p className="mt-5">No items yet.</p>}
 
                 {listItems.map((listItem, index) =>
-                    <div className="pb-6" key={`list_category_${index}`}>
+                    <div className={`pb-6 ${listItem.category === visibleCategory || visibleCategory === 'all' ? 'flex flex-col' : 'hidden' }`} key={`list_category_${index}`}>
                         <p className="font-bold text-right">{listItem.category}</p>
                         <hr className="border-gray-400 mb-2" />
                         {listItem.items.map((item, index_2) =>
