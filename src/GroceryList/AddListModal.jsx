@@ -6,13 +6,15 @@ function AddListModal({ closeHandler, addListHandler }) {
     const [name, setName] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    function clickHandler() {
+    function submitListHandler(event) {
+        event.preventDefault();
+
         if (!name) {
             setErrorMessage("Please enter a name");
             return;
         }
 
-        addListHandler({ name: name, items: [] });
+        addListHandler(name);
         closeHandler();
     }
 
@@ -30,13 +32,15 @@ function AddListModal({ closeHandler, addListHandler }) {
             {errorMessage && <div className="px-2 py-1 mb-2 text-gray-50 bg-red-400">
                 {errorMessage}
             </div>}
-            <div>
-                <label htmlFor="list_name">List Name: </label>
-                <input ref={newNameRef} id="list_name" defaultValue={name} onChange={(e) => setName(e.target.value)} className="border border-gray-400 p-1 rounded-sm" type="text" />
-            </div>
-            <div className="flex justify-end mt-6">
-                <Button type="success" clickHandler={clickHandler}>Start List</Button>
-            </div>
+            <form onSubmit={submitListHandler}>
+                <div>
+                    <label htmlFor="list_name">List Name: </label>
+                    <input ref={newNameRef} id="list_name" defaultValue={name} onChange={(e) => setName(e.target.value)} className="border border-gray-400 p-1 rounded-sm" type="text" />
+                </div>
+                <div className="flex justify-end mt-6">
+                    <Button type="success" clickHandler={submitListHandler}>Start List</Button>
+                </div>
+            </form>
         </Modal>
     )
 }

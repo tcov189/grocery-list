@@ -21,13 +21,10 @@ function App() {
 
   const [lists, setLists] = useState(savedLists);
 
-  function addListHandler(list) {
-    const newId = lists.length + 1;
-    const newList = { ...list, id: newId };
+  function addListHandler(listName) {
+    const updatedLists = dataProvider.addList(listName);
 
-    localStorage.setItem(`list_${newId}`, JSON.stringify(newList));
-
-    setLists([...lists, newList]);
+    setLists(updatedLists);
   }
 
   function removeList(listId) {
@@ -45,6 +42,7 @@ function App() {
     <div className="flex flex-col min-h-screen bg-gray-300">
       <header className="w-full bg-gray-500 text-gray-50 py-3 px-2 h-12">
         <div className="flex">
+          <ShoppingCartIcon className="w-5 mr-1" />
           Grocery List App
         </div>
       </header>

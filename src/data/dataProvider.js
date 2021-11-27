@@ -1,38 +1,38 @@
 const getLists = () => {
     let listKeys = Object.keys(localStorage).filter((list) => list.includes('list_'));
 
-    return listKeys.map((listKey) => JSON.parse(localStorage.getItem(listKey))).sort((a,b) => a.id - b.id );
+    return listKeys.map((listKey) => JSON.parse(localStorage.getItem(listKey))).sort((a, b) => a.id - b.id);
 }
 
 const getList = (id) => {
     return JSON.parse(localStorage.getItem(`list_${id}`));
 }
 
-const addNewListItem = (listId) => {
-    let list = getList(listId);
+const addList = (listName) => {
+    const lists = getLists();
+    let newListId = 1;
 
-    let listItems = [...list.items];
+    if (lists.length > 1) {
+        newListId = lists.map((list) => list.id).sort().splice(-1, 1)[0] + 1;
+    }
 
-    listItems.push({
-        id: listItems.length + 1,
-        quantity: 1,
-        item: "",
-        acquired: false,
-    });
+    const newList = {
+        id: newListId,
+        name: listName,
+        items: [],
+        categories: [
+            "Dairy",
+            "Dry/Can Goods",
+            "Pantry",
+            "Produce",
+            "Meat",
+            "Miscellaneous"
+        ]
+    }
 
-    list.items = listItems;
+    localStorage.setItem(`list_${newListId}`, JSON.stringify(newList));
 
-    return updateList(listId, { ...list });
-}
-
-const removeListItem = (listId, listItemId) => {
-    let list = getList(listId);
-
-    let listItems = [...list.items];
-
-    list.items = listItems.filter((listItem) => listItem.id !== listItemId);
-
-    return updateList(listId, { ...list });
+    return getLists();
 }
 
 const removeList = (listId) => {
@@ -54,6 +54,39 @@ const updateList = (listId, listData) => {
     return newListObject;
 };
 
+
+const clearLists = () => {
+    localStorage.clear();
+}
+
+const addNewListItem = (listId) => {
+    let list = getList(listId);
+
+    let listItems = [...list.items];
+
+    listItems.push({
+        id: listItems.length + 1,
+        item: "",
+        acquired: false,
+        category: "Miscellaneous",
+    });
+
+    list.items = listItems;
+
+    return updateList(listId, { ...list });
+}
+
+const removeListItem = (listId, listItemId) => {
+    let list = getList(listId);
+
+    let listItems = [...list.items];
+
+    list.items = listItems.filter((listItem) => listItem.id !== listItemId);
+
+    return updateList(listId, { ...list });
+}
+
+
 const updateListItem = (listId, updatedItem) => {
     const list = getList(listId);
 
@@ -61,7 +94,7 @@ const updateListItem = (listId, updatedItem) => {
 
     const listItemIndex = items.findIndex((item) => item.id === updatedItem.id);
 
-    items[listItemIndex]= {...items[listItemIndex], ...updatedItem};
+    items[listItemIndex] = { ...items[listItemIndex], ...updatedItem };
 
     list.items = items;
 
@@ -70,12 +103,9 @@ const updateListItem = (listId, updatedItem) => {
     return list;
 }
 
-const clearLists = () => {
-    localStorage.clear();
-}
-
 
 const dataProvider = {
+    addList,
     getLists,
     getList,
     removeListItem,
