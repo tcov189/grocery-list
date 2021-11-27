@@ -12,7 +12,7 @@ const addList = (listName) => {
     const lists = getLists();
     let newListId = 1;
 
-    if (lists.length > 1) {
+    if (lists.length > 0) {
         newListId = lists.map((list) => list.id).sort().splice(-1, 1)[0] + 1;
     }
 
