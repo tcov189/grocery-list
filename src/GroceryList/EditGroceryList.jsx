@@ -6,18 +6,19 @@ import { ChevronLeftIcon, PlusSmIcon, ArrowCircleUpIcon } from '@heroicons/react
 import GroceryEditListItem from './GroceryEditListItem';
 import Button from '../global/Button';
 import dataProvider from '../data/dataProvider';
+import categoryDataProvider from '../data/categoryDataProvider';
 
 function EditGroceryList() {
     const { id } = useParams();
 
     const [currentList, setCurrentList] = useState(dataProvider.getList(id));
     const [listItems, setListItems] = useState([]);
-    const [listCategories, setListCategories] = useState([]);
+    const [listCategories, setListCategories] = useState(categoryDataProvider.getCategories());
+
 
     useEffect(() => {
         if (currentList) {
             setListItems([...currentList.items])
-            setListCategories([...currentList.categories]);
         }
     }, [currentList]);
 

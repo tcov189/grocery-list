@@ -19,15 +19,7 @@ const addList = (listName) => {
     const newList = {
         id: newListId,
         name: listName,
-        items: [],
-        categories: [
-            "Dairy",
-            "Dry/Can Goods",
-            "Pantry",
-            "Produce",
-            "Meat",
-            "Miscellaneous"
-        ]
+        items: []
     }
 
     localStorage.setItem(`list_${newListId}`, JSON.stringify(newList));
