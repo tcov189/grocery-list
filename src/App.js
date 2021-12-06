@@ -8,11 +8,11 @@ import { PlusSmIcon, ShoppingCartIcon, TrashIcon } from '@heroicons/react/outlin
 
 import Button from "./global/Button";
 
-import AddListModal from "./GroceryList/AddListModal";
-import GroceryLists from "./GroceryList/GroceryLists";
-import EditGroceryList from "./GroceryList/EditGroceryList";
+import AddListModal from "./components/modals/AddListModal";
+import GroceryLists from "./views/GroceryLists";
+import EditGroceryList from "./views/EditGroceryList";
 import dataProvider from "./data/dataProvider";
-import ShopGroceryList from "./GroceryList/ShopGroceryList";
+import ShopGroceryList from "./views/ShopGroceryList";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);

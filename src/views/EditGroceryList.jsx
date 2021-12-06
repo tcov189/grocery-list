@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import { ChevronLeftIcon, PlusSmIcon, ArrowCircleUpIcon } from '@heroicons/react/outline'
-import GroceryEditListItem from './GroceryEditListItem';
+import GroceryEditListItem from '../components/lists/GroceryEditListItem';
 import Button from '../global/Button';
 import dataProvider from '../data/dataProvider';
 import categoryDataProvider from '../data/categoryDataProvider';

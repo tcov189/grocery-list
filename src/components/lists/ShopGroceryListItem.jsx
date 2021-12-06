@@ -1,6 +1,7 @@
 import { ShoppingBagIcon } from '@heroicons/react/outline'
 import React, { useState } from 'react'
-import Button from '../global/Button'
+import Button from '../../global/Button';
+
 
 function ShopGroceryListItem({listId, listItem, updateHandler }) {
     const [item, setItem] = useState(listItem ?? "");

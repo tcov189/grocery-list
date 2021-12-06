@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Button from '../global/Button';
-import Modal from '../global/Modal'
+import Button from '../../global/Button';
+import Modal from '../../global/Modal'
 
 function AddListModal({ closeHandler, addListHandler }) {
     const [name, setName] = useState("");

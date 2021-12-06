@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TrashIcon } from '@heroicons/react/outline'
+import Button from '../../global/Button';
 
-import Button from '../global/Button';
 
 function GroceryEditListItem({ listCategories, listId, listItem, deleteHandler, updateHandler }) {
     const [item, setItem] = useState(listItem.item ?? "");

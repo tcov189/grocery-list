@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { ChevronLeftIcon } from '@heroicons/react/outline'
 
 import dataProvider from '../data/dataProvider';
-import ShopGroceryListItem from './ShopGroceryListItem';
+import ShopGroceryListItem from '../components/lists/ShopGroceryListItem';
+
+
 
 function ShopGroceryList() {
     const { id } = useParams();
