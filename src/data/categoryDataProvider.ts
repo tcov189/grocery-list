@@ -1,17 +1,13 @@
-const getCategories = (): Array<string> => {
-  let savedCategories = localStorage.getItem("categories") || "";
+import { GroceryCategory } from "../types/IGroceryListItem";
 
-  return savedCategories.length > 0
-    ? savedCategories?.split(",")
-    : [
-        "Dairy",
-        "Dry/Can Goods",
-        "Frozen",
-        "Pantry",
-        "Produce",
-        "Meat",
-        "Miscellaneous",
-      ];
+const getCategories = (): Array<string> => {
+  let types = [];
+
+  for (const value in GroceryCategory) {
+    types.push(value)
+  }
+
+  return types;
 };
 
 const categoryDataProvider = {
