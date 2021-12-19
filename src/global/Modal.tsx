@@ -13,7 +13,8 @@ function Modal({
   modalTitle = "Modal Title",
   closeHandler,
 }: ComponentProps) {
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useOutsideClicked(modalRef, closeHandler);
 
   return (

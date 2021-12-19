@@ -7,12 +7,15 @@ import { ChevronLeftIcon } from "@heroicons/react/outline";
 import dataProvider from "../data/dataProvider";
 import ShopGroceryListItem from "../components/lists/ShopGroceryListItem";
 import categoryDataProvider from "../data/categoryDataProvider";
+import { IGroceryListItem } from "../types/IGroceryListItem";
+import { IGroceryList } from "../types/GroceryList";
 
 function ShopGroceryList() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
+  const listId = parseInt(id);
 
-  const [currentList, setCurrentList] = useState(dataProvider.getList(id));
-  const [listItems, setListItems] = useState([]);
+  const [currentList, setCurrentList] = useState(dataProvider.getList(listId));
+  const [listItems, setListItems] = useState<{category: string, items: IGroceryListItem[]}[]>([]);
 
   const allCategories = categoryDataProvider.getCategories();
 
@@ -24,17 +27,17 @@ function ShopGroceryList() {
     }
   }, [currentList]);
 
-  function updateHandler(listId, item) {
-    const updatedList = dataProvider.updateListItem(listId, item);
+  function updateHandler(updateListId: number, item: IGroceryListItem) {
+    const updatedList = dataProvider.updateListItem(updateListId, item);
 
     setCurrentList(updatedList);
     formatGroceryListItems(updatedList);
   }
 
-  function formatGroceryListItems(list) {
+  function formatGroceryListItems(list: IGroceryList) {
     const categories = allCategories;
 
-    const groceryItems = categories.map((category) => ({
+    const groceryItems: {category: string, items: IGroceryListItem[]}[] = categories.map((category) => ({
       category,
       items: list.items.filter((item) => item.category === category),
     }));
