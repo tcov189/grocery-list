@@ -2,7 +2,13 @@ import { ShoppingBagIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import Button from "../../global/Button";
 
-function ShopGroceryListItem({ listId, listItem, updateHandler }) {
+interface CompontentProps {
+  listId: any,
+  listItem: any,
+  updateHandler: any,
+}
+
+function ShopGroceryListItem({ listId, listItem, updateHandler }: CompontentProps) {
   const [item, setItem] = useState(listItem ?? "");
 
   const [acquired, setAcquired] = useState(item.acquired ?? false);
@@ -14,7 +20,7 @@ function ShopGroceryListItem({ listId, listItem, updateHandler }) {
     updateHandler(listId, { id: listItem.id, acquired: acquiredStatus });
   }
 
-  let itemStyle = {
+  let itemStyle: object = {
     textDecoration: acquired ? "line-through" : null,
     fontStyle: acquired ? "italic" : null,
     color: acquired ? 'rgba(0,0,0,.5)' : null,

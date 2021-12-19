@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+
 import { PlusSmIcon, ShoppingCartIcon, TrashIcon } from '@heroicons/react/outline'
 
 import Button from "./global/Button";
@@ -21,13 +22,13 @@ function App() {
 
   const [lists, setLists] = useState(savedLists);
 
-  function addListHandler(listName) {
+  function addListHandler(listName: string) {
     const updatedLists = dataProvider.addList(listName);
 
     setLists(updatedLists);
   }
 
-  function removeList(listId) {
+  function removeList(listId: number) {
     const updatedLists = dataProvider.removeList(listId);
 
     setLists(updatedLists);

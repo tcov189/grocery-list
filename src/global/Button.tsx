@@ -1,8 +1,14 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 
-function Button({ children, clickHandler, type = "default" }) {
+interface ComponentProps {
+  children: React.ReactNode,
+  clickHandler: (clickEvent: SyntheticEvent) => void,
+  type: string,
+}
+
+function Button({ children, clickHandler, type = "default" }: ComponentProps) {
   const onClickHandler =
-    clickHandler || (() => console.log("button was clicked"));
+    clickHandler || ((e) => console.log("button was clicked"));
 
   let buttonClasses = "flex items-start px-2 py-2 font-semibold border rounded-sm shadow-sm";
 
