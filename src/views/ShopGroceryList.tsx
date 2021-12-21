@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -15,34 +15,35 @@ function ShopGroceryList() {
   const listId = parseInt(id);
 
   const [currentList, setCurrentList] = useState(dataProvider.getList(listId));
-  const [listItems, setListItems] = useState<{category: string, items: IGroceryListItem[]}[]>([]);
+  const [listItems, setListItems] = useState<
+    { category: string; items: IGroceryListItem[] }[]
+  >([]);
 
-  const allCategories = categoryDataProvider.getCategories();
+  const allCategories = useRef(categoryDataProvider.getCategories());
 
   const [visibleCategory, setVisibleCategory] = useState("all");
 
+  const formatGroceryListItems = useCallback((list: IGroceryList) => {
+    return allCategories.current.map((category) => ({
+      category,
+      items: list.items.filter((item) => item.category === category),
+    }));
+  }, [allCategories]);
+
   useEffect(() => {
     if (currentList) {
-      formatGroceryListItems(currentList);
+      const formattedList = formatGroceryListItems(currentList);
+      setListItems(formattedList);
     }
-  }, [currentList]);
+  }, [currentList, formatGroceryListItems]);
 
   function updateHandler(updateListId: number, item: IGroceryListItem) {
     const updatedList = dataProvider.updateListItem(updateListId, item);
 
     setCurrentList(updatedList);
-    formatGroceryListItems(updatedList);
-  }
 
-  function formatGroceryListItems(list: IGroceryList) {
-    const categories = allCategories;
-
-    const groceryItems: {category: string, items: IGroceryListItem[]}[] = categories.map((category) => ({
-      category,
-      items: list.items.filter((item) => item.category === category),
-    }));
-
-    setListItems(groceryItems);
+    const formattedList = formatGroceryListItems(updatedList);
+    setListItems(formattedList);
   }
 
   return (
@@ -67,7 +68,7 @@ function ShopGroceryList() {
           onChange={(e) => setVisibleCategory(e.target.value)}
         >
           <option value="all">All</option>
-          {allCategories.map((cat, index) => (
+          {allCategories.current.map((cat, index) => (
             <option value={cat} key={`category_${index}`}>
               {cat}
             </option>

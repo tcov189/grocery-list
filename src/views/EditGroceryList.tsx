@@ -16,7 +16,7 @@ function EditGroceryList() {
 
     const [currentList, setCurrentList] = useState(dataProvider.getList(listId));
     const [listItems, setListItems] = useState<IGroceryListItem[]>([]);
-    const [listCategories, setListCategories] = useState(categoryDataProvider.getCategories());
+    const [listCategories] = useState(categoryDataProvider.getCategories());
 
     useEffect(() => {
         if (currentList) {
