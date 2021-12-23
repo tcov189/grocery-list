@@ -39,6 +39,8 @@ function App() {
     setLists([]);
   }
 
+  const isOpen: boolean = false;
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-300">
       <header className="w-full bg-gray-500 text-gray-50 py-3 px-2 h-12">
