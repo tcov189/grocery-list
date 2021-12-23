@@ -10,7 +10,7 @@ import categoryDataProvider from "../data/categoryDataProvider";
 import { IGroceryListItem } from "../types/IGroceryListItem";
 import { IGroceryList } from "../types/GroceryList";
 
-function ShopGroceryList() {
+function ShopGroceryListView() {
   const { id } = useParams<{ id: string }>();
   const listId = parseInt(id);
 
@@ -109,4 +109,4 @@ function ShopGroceryList() {
   );
 }
 
-export default ShopGroceryList;
+export default ShopGroceryListView;

@@ -10,7 +10,7 @@ function Button({ children, clickHandler, type = "default" }: ComponentProps) {
   const onClickHandler = clickHandler;
 
   let buttonClasses =
-    "flex items-start px-2 py-2 font-semibold border rounded-sm shadow-sm";
+    "flex items-center px-2 py-2 font-semibold border rounded-sm shadow-sm";
 
   switch (type) {
     case "success":

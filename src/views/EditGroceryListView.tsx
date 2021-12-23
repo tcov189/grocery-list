@@ -10,7 +10,7 @@ import categoryDataProvider from '../data/categoryDataProvider';
 
 import { IGroceryListItem } from '../types/IGroceryListItem';
 
-function EditGroceryList() {
+function EditGroceryListView() {
     const { id } = useParams<{ id: string }>();
     const listId = parseInt(id);
 
@@ -101,4 +101,4 @@ function EditGroceryList() {
     );
 }
 
-export default EditGroceryList
+export default EditGroceryListView
