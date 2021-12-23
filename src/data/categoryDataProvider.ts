@@ -1,13 +1,7 @@
 import { GroceryCategory } from "../types/IGroceryListItem";
 
 const getCategories = (): Array<string> => {
-  let types = [];
-
-  for (const value in GroceryCategory) {
-    types.push(value)
-  }
-
-  return types;
+  return Object.values(GroceryCategory);
 };
 
 const categoryDataProvider = {
