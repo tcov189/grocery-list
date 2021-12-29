@@ -9,6 +9,7 @@ import ShopGroceryListItem from "../components/lists/ShopGroceryListItem";
 import categoryDataProvider from "../data/categoryDataProvider";
 import { IGroceryListItem } from "../types/IGroceryListItem";
 import { IGroceryList } from "../types/GroceryList";
+import BaseLayout from "./layouts/BaseLayout";
 
 function ShopGroceryListView() {
   const { id } = useParams<{ id: string }>();
@@ -47,7 +48,7 @@ function ShopGroceryListView() {
   }
 
   return (
-    <div>
+    <BaseLayout>
       <div className="flex items-center">
         <div className="w-1/6">
           <Link to="/">
@@ -105,7 +106,7 @@ function ShopGroceryListView() {
           );
         })}
       </div>
-    </div>
+    </BaseLayout>
   );
 }
 

@@ -9,6 +9,7 @@ import dataProvider from '../data/dataProvider';
 import categoryDataProvider from '../data/categoryDataProvider';
 
 import { IGroceryListItem } from '../types/IGroceryListItem';
+import BaseLayout from './layouts/BaseLayout';
 
 function EditGroceryListView() {
     const { id } = useParams<{ id: string }>();
@@ -65,7 +66,7 @@ function EditGroceryListView() {
     }
 
     return (
-      <div>
+      <BaseLayout>
         <div className="flex items-center">
           <div className="w-1/6">
             <Link to="/">
@@ -97,7 +98,7 @@ function EditGroceryListView() {
             <PlusSmIcon className="w-5" /> Add Item
           </Button>
         </div>
-      </div>
+      </BaseLayout>
     );
 }
 
